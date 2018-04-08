@@ -1,0 +1,3 @@
+
+        mkdir -p /srv/salt
+        git clone https://github.com/colinxy/salt-vps.git /srv/salt/base
