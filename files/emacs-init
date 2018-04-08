@@ -1,0 +1,111 @@
+;;; minimal emacs config -*- mode: emacs-lisp -*-
+
+;; disable start-up message
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message t)
+
+;; backup files
+(setq backup-directory-alist '(("." . "~/.saves"))
+      backup-by-copying t
+      delete-old-versions t
+      kept-new-versions 10
+      kept-old-versions 2
+      version-control t)
+
+;; substitute y-or-n-p for yes-or-no-p
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; smooth scrolling
+;; keyboard
+(setq scroll-margin 1
+      scroll-step 1
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 1)
+;; mouse
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ; one line at a time
+;; (setq mouse-wheel-progressive-speed nil) ; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse t)       ; scroll window under mouse
+
+;; do not blink cursor
+(blink-cursor-mode -1)
+;; make cursor blink as few as possible
+;; (setq blink-cursor-blinks 1)
+;; show prefix key in echo area quicker
+(setq echo-keystrokes 0.1)
+
+;; auto revert if file changes on disk
+(global-auto-revert-mode)
+
+;; do not indent with tabs
+(setq-default indent-tabs-mode nil)
+;; (setq-default tab-width 4)
+(global-set-key (kbd "RET") 'newline-and-indent)
+
+;; some keys are easy to mispress
+(global-unset-key (kbd "C-o"))
+;; (global-unset-key (kbd "M-)"))
+
+(column-number-mode t)
+(show-paren-mode 1)
+(global-hl-line-mode)
+;; (setq line-number-display-limit-width 5) ; line number in mode line
+;; line-number-mode-hook
+
+;; use DEL to delete selected text
+(delete-selection-mode 1)
+
+;; kill the entire line (including the newline character)
+(setq kill-whole-line t)
+
+;; modifier key
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'meta)
+  (setq mac-command-modifier 'super)
+  (global-set-key (kbd "s-c") 'kill-ring-save)
+  (global-set-key (kbd "s-v") 'yank))
+
+;; auto insert pair
+;; M-( ; insert ()
+(setq parens-require-spaces nil)
+(electric-pair-mode 1)
+
+;; upcase/downcase region
+(global-set-key (kbd "M-u") 'upcase-dwim)
+(global-set-key (kbd "M-l") 'downcase-dwim)
+(global-set-key (kbd "M-c") 'capitalize-dwim)
+
+;; delete trailing white space
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; final newline
+(setq require-final-newline t)
+
+;; vc
+(setq vc-follow-symlinks t)
+
+(define-key isearch-mode-map (kbd "C-d") 'isearch-forward-symbol-at-point)
+;; or M-s . outside of isearch mode
+
+(setq split-width-threshold 150) ;split horizontally if at least <> columns
+
+;; for window
+(when tool-bar-mode
+  (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+(when (not window-system)
+  (menu-bar-mode -1))
+
+;; move between windows
+;; terminal
+(define-key input-decode-map "\e[1;2A" [S-up])
+(define-key input-decode-map "\e[1;2B" [S-down])
+(define-key input-decode-map "\e[1;2D" [S-left])
+(define-key input-decode-map "\e[1;2C" [S-right])
+(windmove-default-keybindings)
+
+;; c/c++
+(setq-default c-basic-offset 4
+              c-default-style "k&r")
+
+;; python
+(setq-default python-indent-offset 4)
