@@ -2,6 +2,7 @@
 
 tools:
   pkg.installed:
+    - skip_verify: True
     - pkgs:
       - {{ vimpkg }}
       - emacs-nox
@@ -9,6 +10,7 @@ tools:
       - curl
       - htop
       - ranger
+      - tmux
 
 vimrc:
   file.blockreplace:
@@ -18,7 +20,7 @@ vimrc:
     - append_if_not_found: True
     - backup: '.bak'
     - show_changes: False
-    - source: salt://files/vimrc
+    - source: salt://tools/vimrc
 
 emacs:
   file.blockreplace:
@@ -28,4 +30,4 @@ emacs:
     - append_if_not_found: True
     - backup: '.bak'
     - show_changes: False
-    - source: salt://files/emacs-init
+    - source: salt://tools/emacs-init
