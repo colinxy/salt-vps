@@ -31,3 +31,9 @@ emacs:
     - backup: '.bak'
     - show_changes: False
     - source: salt://tools/emacs-init
+
+# rely on /etc/bashrc sourcing files in /etc/profile.d
+bashrc:
+  file.managed:
+    - name: /etc/profile.d/custom.sh
+    - source: salt://tools/bashrc

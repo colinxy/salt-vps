@@ -1,4 +1,8 @@
 initial setup for fedora server
 
+        dnf install git salt-minion
         mkdir -p /srv/salt
         git clone https://github.com/colinxy/salt-vps.git /srv/salt/base
+        mkdir -p /etc/salt/minion.d
+        cp /srv/salt/base/masterless.conf /etc/salt/minion.d
+        salt-call state.apply
