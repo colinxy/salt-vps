@@ -1,5 +1,7 @@
 initial setup for fedora server
 
+        dnf upgrade --refresh
+
         dnf install git salt-minion
         mkdir -p /srv/salt
         git clone https://github.com/colinxy/salt-vps.git /srv/salt/base

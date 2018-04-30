@@ -37,3 +37,13 @@ bashrc:
   file.managed:
     - name: /etc/profile.d/custom.sh
     - source: salt://tools/bashrc
+
+inputrc:
+  file.blockreplace:
+    - name: /etc/inputrc
+    - marker_start: '### START custom inputrc ###'
+    - marker_end:   '### END custom inputrc ###'
+    - append_if_not_found: True
+    - backup: '.bak'
+    - show_changes: False
+    - source: salt://tools/inputrc
