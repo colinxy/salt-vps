@@ -11,6 +11,7 @@ tools:
       - htop
       - ranger
       - tmux
+      - bash-completion
 
 vimrc:
   file.blockreplace:
@@ -37,6 +38,7 @@ bashrc:
   file.managed:
     - name: /etc/profile.d/custom.sh
     - source: salt://tools/bashrc
+    - show_changes: False
 
 inputrc:
   file.blockreplace:

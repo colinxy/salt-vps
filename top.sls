@@ -2,3 +2,4 @@ base:
   '*':
     - tools
     - znc
+    - docker
